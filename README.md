@@ -30,7 +30,7 @@ ___
 ```
 tig start
 ```
-Start the tig miner / (Démarre le mineur)<br>
+Start the tig miner (Démarre le mineur)<br>
 
 ___
 
@@ -38,7 +38,7 @@ ___
 ```
 tig stop
 ```
-Stop the tig miner / (Stop le mineur)<br>
+Stop the tig miner (Stop le mineur)<br>
 
 ___
 
@@ -46,7 +46,7 @@ ___
 ```
 tig restart
 ```
-Restart the tig miner / (Redemarre le mineur)<br>
+Restart the tig miner (Redemarre le mineur)<br>
 
 
 ___
@@ -55,6 +55,6 @@ ___
 ```
 tig watch
 ```
-Show watchdog logs / (Affiche les logs du watchdog)<br>
+Show watchdog logs (Affiche les logs du watchdog)<br>
 
 
