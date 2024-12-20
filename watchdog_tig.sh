@@ -48,11 +48,11 @@ echo -e "Elapsed Time : ${elapsed_color}$elapsed_minutes minutes\e[0m"
 
 # if more than 5 minutes, restart miner
 if [ "$elapsed_minutes" -ge 5 ]; then
-    echo -e "\e[31mINACTIVITY : Restarting TIG Miner\e[0m"
+    echo -e "\e[31m$(date '+%Y-%m-%d %H:%M:%S') - INACTIVITY : Restarting TIG Miner\e[0m"
     #tig restart
-    /usr/bin/pkill screen
-    /usr/bin/screen -wipe
-    /usr/bin/pkill screen
+    /usr/bin/pkill screen > /dev/null 2>&1 
+    /usr/bin/screen -wipe > /dev/null 2>&1
+    /usr/bin/pkill screen > /dev/null 2>&1
     cd $HOME/tig_pool
     /usr/bin/screen -S pool_tig -L -Logfile "$HOME/tig_pool/tig.log" -dm bash -c "$HOME/tig_pool/pool_tig_launch_*; exec bash"
 fi
