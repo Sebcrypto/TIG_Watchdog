@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# Display the commands the script can run
+usage() {
+    echo "Usage: $0 {start|stop|restart|watch}"
+    echo "tig start   : Start the tig miner"
+    echo "tig stop    : Stop the tig miner"
+    echo "tig restart : Restart the tig miner"
+    echo "tig watch   : Show watchdog logs"
+    exit 1
+}
+
+# if no argument is passed, script will display tig screen if exist or launch tig
+if [ -z "$1" ]; then
+        if screen -list | grep -q "\.pool_tig"; then
+                screen -x pool_tig
+        else
+                cd ~/tig_pool
+                screen -dmS pool_tig -L -Logfile "$HOME/tig_pool/tig.log" bash -c "./pool_tig_launch_*;
+                exec bash" && screen -r pool_tig
+        fi
+
+fi
+
+case "$1" in
+    start)
+        if screen -list | grep -q "\.pool_tig"; then
+                screen -x pool_tig
+        else
+                cd ~/tig_pool
+                screen -S pool_tig -L -Logfile "$HOME/tig_pool/tig.log" -dm bash -c "./pool_tig_launch_*;
+                exec bash" && screen -r pool_tig
+        fi
+        ;;
+    stop)
+        pkill screen
+        screen -wipe
+        pkill screen
+        ;;
+    restart)
+        pkill screen
+        screen -wipe
+        pkill screen
+        cd ~/tig_pool
+        screen -S pool_tig -L -Logfile "$HOME/tig_pool/tig.log" -dm bash -c "./pool_tig_launch_*;
+        exec bash" && screen -r pool_tig
+        ;;
+    watch)
+        tail -f $HOME/watchdog.log
+        ;;
+
+    *)
+        usage
+        ;;
+esac
